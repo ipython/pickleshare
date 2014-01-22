@@ -38,7 +38,8 @@ from __future__ import print_function
 
 __version__ = "0.4"
 
-from IPython.external.path import path as Path
+from path import path as Path
+# from IPython.external.path import path as Path
 import os,stat,time
 import collections
 try:

@@ -5,7 +5,7 @@ import pickleshare
 setup(
     name = "pickleshare",
     version = pickleshare.__version__,
-    py_modules = ['pickleshare','path'],
+    py_modules = ['pickleshare'],
     author = "Ville Vainio",
     author_email = "vivainio@gmail.com",
     description = "Tiny 'shelve'-like database with concurrency support",
@@ -37,14 +37,8 @@ This module is certainly not ZODB, but can be used for low-load
 (non-mission-critical) situations where tiny code size trumps the 
 advanced features of a "real" object database.
 
-Installation guide: easy_install pickleshare
-""",
+Installation guide: pip install path pickleshare
+"""
     
-      entry_points = {
-            'console_scripts': [
-                'pickleshare = pickleshare:main',
-		]
-	}
-
 
 )

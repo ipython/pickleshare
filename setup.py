@@ -3,16 +3,16 @@ from setuptools import setup, find_packages
 import pickleshare
 
 setup(
-    name = "pickleshare",
-    version = pickleshare.__version__,
-    py_modules = ['pickleshare'],
-    author = "Ville Vainio",
-    author_email = "vivainio@gmail.com",
-    description = "Tiny 'shelve'-like database with concurrency support",
-    license = "MIT",
-    url="http://vvtools.googlecode.com/svn/trunk/pickleshare#egg=pickleshare-dev",
-    keywords = "database persistence pickle ipc shelve",
-    long_description = """\ 
+    name="pickleshare",
+    version=pickleshare.__version__,
+    py_modules=['pickleshare'],
+    author="Ville Vainio",
+    author_email="vivainio@gmail.com",
+    description="Tiny 'shelve'-like database with concurrency support",
+    license="MIT",
+    url="https://github.com/vivainio/pickleshare",
+    keywords="database persistence pickle ipc shelve",
+    long_description="""\
 PickleShare - a small 'shelve' like datastore with concurrency support
 
 Like shelve, a PickleShareDB object acts like a normal dictionary. Unlike shelve,
@@ -33,12 +33,12 @@ Example usage::
     db['paths/are/ok/key'] = [1,(5,46)]
     print db.keys()
 
-This module is certainly not ZODB, but can be used for low-load 
+This module is certainly not ZODB, but can be used for low-load
 (non-mission-critical) situations where tiny code size trumps the 
 advanced features of a "real" object database.
 
 Installation guide: pip install path pickleshare
 """
-    
+
 
 )

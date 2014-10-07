@@ -1,15 +1,22 @@
 from setuptools import setup
 
-import pickleshare
+# extract version from pickleshare.py
+# can't import because pickleshare depends on path.py
+with open('pickleshare.py') as f:
+    for line in f:
+        if line.startswith('__version__'):
+            version = eval(line.split('=', 1)[1])
+            break
 
 setup(
     name="pickleshare",
-    version=pickleshare.__version__,
+    version=version,
     py_modules=['pickleshare'],
     author="Ville Vainio",
     author_email="vivainio@gmail.com",
     description="Tiny 'shelve'-like database with concurrency support",
     license="MIT",
+    install_requires=["path.py"],
     url="https://github.com/vivainio/pickleshare",
     keywords="database persistence pickle ipc shelve",
     long_description="""\

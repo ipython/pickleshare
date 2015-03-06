@@ -730,7 +730,7 @@ class path(_base):
     def makedirs_p(self, mode=0777):
         try:
             os.makedirs(self, mode)
-        except OSError, e:
+        except OSError as e:
             # be happy if someone already created the path
             # older version will raise an error
             if e.errno != errno.EEXIST:

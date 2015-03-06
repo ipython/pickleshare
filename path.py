@@ -32,7 +32,7 @@ Date:    7 Mar 2004
 
 from __future__ import generators
 
-import sys, os, fnmatch, glob, shutil, codecs
+import sys, os, fnmatch, glob, shutil, codecs, errno
 
 __version__ = '2.0.4'
 __all__ = ['path']
@@ -726,6 +726,15 @@ class path(_base):
 
     def makedirs(self, mode=0777):
         os.makedirs(self, mode)
+
+    def makedirs_p(self, mode=0777):
+        try:
+            os.makedirs(self, mode)
+        except OSError as e:
+            # be happy if someone already created the path
+            # older version will raise an error
+            if e.errno != errno.EEXIST:
+                raise
 
     def rmdir(self):
         os.rmdir(self)

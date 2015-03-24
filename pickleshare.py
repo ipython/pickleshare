@@ -94,7 +94,7 @@ class PickleShareDB(collections.MutableMapping):
         # We specify protocol 2, so that we can mostly go between Python 2
         # and Python 3. We can upgrade to protocol 3 when Python 2 is obsolete.
         with fil.open('wb') as f:
-            pickled = pickle.dump(value, f, protocol=2)
+            pickle.dump(value, f, protocol=2)
         try:
             self.cache[fil] = (value,fil.mtime)
         except OSError as e:

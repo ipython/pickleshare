@@ -36,7 +36,7 @@ License: MIT open source license.
 from __future__ import print_function
 
 
-__version__ = "0.4"
+__version__ = "0.5"
 
 from path import path as Path
 # from IPython.external.path import path as Path

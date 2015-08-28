@@ -16,7 +16,7 @@ setup(
     author_email="vivainio@gmail.com",
     description="Tiny 'shelve'-like database with concurrency support",
     license="MIT",
-    install_requires=["path.py"],
+    install_requires=["path.py>=6.2"],
     url="https://github.com/pickleshare/pickleshare",
     keywords="database persistence pickle ipc shelve",
     long_description="""\

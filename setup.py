@@ -45,7 +45,9 @@ This module is certainly not ZODB, but can be used for low-load
 advanced features of a "real" object database.
 
 Installation guide: pip install path pickleshare
-"""
-
-
+""",
+    classifiers=[
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3',
+    ]
 )

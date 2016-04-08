@@ -46,7 +46,7 @@ This module is certainly not ZODB, but can be used for low-load
 (non-mission-critical) situations where tiny code size trumps the 
 advanced features of a "real" object database.
 
-Installation guide: pip install path pickleshare
+Installation guide: pip install pickleshare
 """,
     classifiers=[
         'License :: OSI Approved :: MIT License',

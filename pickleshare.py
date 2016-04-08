@@ -36,7 +36,7 @@ License: MIT open source license.
 from __future__ import print_function
 
 
-__version__ = "0.7"
+__version__ = "0.7.1"
 
 try:
     from pathlib import Path
@@ -62,7 +62,8 @@ class PickleShareDB(collections.MutableMapping):
     """ The main 'connection' object for PickleShare database """
     def __init__(self,root):
         """ Return a db object that will manage the specied directory"""
-        self.root = Path(os.path.expanduser(str(root))).resolve()
+        root = os.path.abspath(os.path.expanduser(str(root)))
+        self.root = Path(root)
         if not self.root.is_dir():
             self.root.mkdir(parents=True)
         # cache has { 'key' : (obj, orig_mod_time) }

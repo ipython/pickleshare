@@ -16,7 +16,9 @@ setup(
     author_email="vivainio@gmail.com",
     description="Tiny 'shelve'-like database with concurrency support",
     license="MIT",
-    install_requires=["path.py>=6.2"],
+    extras_require = {
+        ':python_version == "2.7"': ['pathlib2'],
+    },
     url="https://github.com/pickleshare/pickleshare",
     keywords="database persistence pickle ipc shelve",
     long_description="""\
@@ -48,6 +50,7 @@ Installation guide: pip install path pickleshare
 """,
     classifiers=[
         'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
     ]
 )

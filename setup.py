@@ -49,6 +49,7 @@ advanced features of a "real" object database.
 Installation guide: pip install path pickleshare
 """,
     classifiers=[
+        'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',

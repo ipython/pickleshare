@@ -17,7 +17,8 @@ setup(
     description="Tiny 'shelve'-like database with concurrency support",
     license="MIT",
     extras_require = {
-        ':python_version < "3.4"': ['pathlib2'],
+        # Ugly, but we can't do < comparison here
+        ':python_version in "2.6 2.7 3.2 3.3"': ['pathlib2'],
     },
     url="https://github.com/pickleshare/pickleshare",
     keywords="database persistence pickle ipc shelve",

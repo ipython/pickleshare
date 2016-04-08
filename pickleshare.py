@@ -38,8 +38,12 @@ from __future__ import print_function
 
 __version__ = "0.6"
 
-from path import Path
-# from IPython.external.path import path as Path
+try:
+    from pathlib import Path
+except ImportError:
+    # Python 2 backport
+    from pathlib2 import Path
+
 import os,stat,time
 import collections
 try:
@@ -58,9 +62,9 @@ class PickleShareDB(collections.MutableMapping):
     """ The main 'connection' object for PickleShare database """
     def __init__(self,root):
         """ Return a db object that will manage the specied directory"""
-        self.root = Path(root).expanduser().abspath()
-        if not self.root.isdir():
-            self.root.makedirs_p()
+        self.root = Path(os.path.expanduser(str(root))).resolve()
+        if not self.root.is_dir():
+            self.root.mkdir(parents=True)
         # cache has { 'key' : (obj, orig_mod_time) }
         self.cache = {}
 
@@ -89,14 +93,14 @@ class PickleShareDB(collections.MutableMapping):
         """ db['key'] = 5 """
         fil = self.root / key
         parent = fil.parent
-        if parent and not parent.isdir():
-            parent.makedirs()
+        if parent and not parent.is_dir():
+            parent.mkdir(parents=True)
         # We specify protocol 2, so that we can mostly go between Python 2
         # and Python 3. We can upgrade to protocol 3 when Python 2 is obsolete.
         with fil.open('wb') as f:
             pickle.dump(value, f, protocol=2)
         try:
-            self.cache[fil] = (value,fil.mtime)
+            self.cache[fil] = (value, fil.stat().st_mtime)
         except OSError as e:
             if e.errno != errno.ENOENT:
                 raise
@@ -104,8 +108,8 @@ class PickleShareDB(collections.MutableMapping):
     def hset(self, hashroot, key, value):
         """ hashed set """
         hroot = self.root / hashroot
-        if not hroot.isdir():
-            hroot.makedirs()
+        if not hroot.is_dir():
+            hroot.mkdir()
         hfile = hroot / gethashfile(key)
         d = self.get(hfile, {})
         d.update( {key : value})
@@ -172,9 +176,9 @@ class PickleShareDB(collections.MutableMapping):
         self[hashroot + '/xx'] = all
         for f in hfiles:
             p = self.root / f
-            if p.basename() == 'xx':
+            if p.name == 'xx':
                 continue
-            p.remove()
+            p.unlink()
 
 
 
@@ -183,7 +187,7 @@ class PickleShareDB(collections.MutableMapping):
         fil = self.root / key
         self.cache.pop(fil,None)
         try:
-            fil.remove()
+            fil.unlink()
         except OSError:
             # notfound and permission denied are ok - we
             # lost, the other process wins the conflict
@@ -191,16 +195,16 @@ class PickleShareDB(collections.MutableMapping):
 
     def _normalized(self, p):
         """ Make a key suitable for user's eyes """
-        return str(self.root.relpathto(p)).replace('\\','/')
+        return str(p.relative_to(self.root)).replace('\\','/')
 
     def keys(self, globpat = None):
         """ All keys in DB, or all keys matching a glob"""
 
         if globpat is None:
-            files = self.root.walkfiles()
+            files = self.root.rglob('*')
         else:
-            files = [Path(p) for p in glob.glob(self.root/globpat)]
-        return [self._normalized(p) for p in files if p.isfile()]
+            files = self.root.glob(globpat)
+        return [self._normalized(p) for p in files if p.is_file()]
 
     def __iter__(self):
         return iter(self.keys())

@@ -65,7 +65,13 @@ class PickleShareDB(collections.MutableMapping):
         root = os.path.abspath(os.path.expanduser(str(root)))
         self.root = Path(root)
         if not self.root.is_dir():
-            self.root.mkdir(parents=True)
+            # catching the exception is necessary if multiple processes are concurrently trying to create a folder
+            # exists_ok keyword argument of mkdir does the same but only from Python 3.5
+            try:
+                self.root.mkdir(parents=True)
+            except OSError as e:
+                if e.errno != errno.EEXIST:
+                    raise
         # cache has { 'key' : (obj, orig_mod_time) }
         self.cache = {}
 

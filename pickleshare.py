@@ -69,9 +69,9 @@ class PickleShareDB(collections.MutableMapping):
             # exists_ok keyword argument of mkdir does the same but only from Python 3.5
             try:
                 self.root.mkdir(parents=True)
-            # except FileExistsError: # this is Python > 3.3 only
-            except:
-                pass
+            except OSError as e:
+                if e.errno != errno.EEXIST:
+                    raise
         # cache has { 'key' : (obj, orig_mod_time) }
         self.cache = {}
 

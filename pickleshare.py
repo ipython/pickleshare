@@ -50,7 +50,6 @@ try:
     import cPickle as pickle
 except ImportError:
     import pickle
-import glob
 import errno
 
 def gethashfile(key):

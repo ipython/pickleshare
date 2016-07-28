@@ -4,7 +4,7 @@ import os
 from pickleshare import PickleShareDB
 
 def test_pickleshare(tmpdir):
-    db = PickleShareDB(str(tmpdir))
+    db = PickleShareDB(tmpdir)
     db.clear()
     print("Should be empty:",db.items())
     assert len(db) == 0
@@ -33,7 +33,7 @@ def test_pickleshare(tmpdir):
     assert lnk.bar == 7
 
 def test_stress(tmpdir):
-    db = PickleShareDB(str(tmpdir))
+    db = PickleShareDB(tmpdir)
     import time,sys
     for i in range(100):
         for j in range(500):

@@ -61,7 +61,9 @@ class PickleShareDB(collections.MutableMapping):
     """ The main 'connection' object for PickleShare database """
     def __init__(self,root):
         """ Return a db object that will manage the specied directory"""
-        root = os.path.abspath(os.path.expanduser(str(root)))
+        if isinstance(root, Path):
+            root = str(root)
+        root = os.path.abspath(os.path.expanduser(root))
         self.root = Path(root)
         if not self.root.is_dir():
             # catching the exception is necessary if multiple processes are concurrently trying to create a folder

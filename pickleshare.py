@@ -51,6 +51,12 @@ try:
 except ImportError:
     import pickle
 import errno
+import sys
+
+if sys.version_info[0] >= 3:
+    string_types = (str,)
+else:
+    string_types = (str, unicode)
 
 def gethashfile(key):
     return ("%02x" % abs(hash(key) % 256))[-2:]
@@ -61,7 +67,9 @@ class PickleShareDB(collections.MutableMapping):
     """ The main 'connection' object for PickleShare database """
     def __init__(self,root):
         """ Return a db object that will manage the specied directory"""
-        root = os.path.abspath(os.path.expanduser(str(root)))
+        if not isinstance(root, string_types):
+            root = str(root)
+        root = os.path.abspath(os.path.expanduser(root))
         self.root = Path(root)
         if not self.root.is_dir():
             # catching the exception is necessary if multiple processes are concurrently trying to create a folder

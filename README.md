@@ -30,13 +30,12 @@ advanced features of a "real" object database.
 Installation guide: 
 
 ```sh
-pip install path pickleshare
+pip install pickleshare
 ```
 
 Or, if installing from source
 
 ```sh
-pip install path
 pip install .
 ```
 

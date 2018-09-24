@@ -63,7 +63,7 @@ def gethashfile(key):
 
 _sentinel = object()
 
-class PickleShareDB(collections.MutableMapping):
+class PickleShareDB(collections.abc.MutableMapping):
     """ The main 'connection' object for PickleShare database """
     def __init__(self,root):
         """ Return a db object that will manage the specied directory"""

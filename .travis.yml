@@ -1,6 +1,6 @@
 language: python
 dist: trusty
-sudo: false
+sudo: required
 install: pip install -e .
 script: pyt.test
 

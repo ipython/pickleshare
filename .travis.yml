@@ -14,7 +14,7 @@ sudo: false
 python: 
   - "3.7"
   - "3.8-dev"
- dist: xenial
+dist: xenial
 install: pip install -e .
 script: py.test
 sudo: false

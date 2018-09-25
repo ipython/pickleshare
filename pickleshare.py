@@ -45,7 +45,10 @@ except ImportError:
     from pathlib2 import Path
 
 import os,stat,time
-import collections
+try:
+    import collections.abc as collections_abc
+except ImportError:
+    import collections as collections_abc
 try:
     import cPickle as pickle
 except ImportError:
@@ -63,7 +66,7 @@ def gethashfile(key):
 
 _sentinel = object()
 
-class PickleShareDB(collections.abc.MutableMapping):
+class PickleShareDB(collections_abc.MutableMapping):
     """ The main 'connection' object for PickleShare database """
     def __init__(self,root):
         """ Return a db object that will manage the specied directory"""

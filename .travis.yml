@@ -1,24 +1,28 @@
 language: python
-install: pip install -e .
-script: py.test
-sudo: false
+dist: trusty
+sudo: required
+
 python:
-  - "pypy"
-  - "pypy3"
-  - "2.7"
-  - "3.3"
-  - "3.4"
-  - "3.5-dev"
-  - "3.5"
-  - "3.6-dev"
-  - "3.6"
-  - "3.7-dev"
+    - "pypy"
+    - "pypy3"
+    - "2.7"
+    - "3.3"
+    - "3.4"
+    - "3.5-dev"
+    - "3.5"
+    - "3.6-dev"
+    - "3.6"
+    - "3.7-dev"
 
 matrix:
-    include:
-  - python: "3.7"
-    dist: xenial
-    sudo: true
-  - python: "3.8-dev"
-    dist: xenial
-    sudo: true
+  include:
+    - python: "3.7"
+      dist: xenial
+      sudo: true
+      install: pip install -e .
+      script: py.test
+    - python: "3.8-dev"
+      dist: xenial
+      sudo: true
+      install: pip install -e .
+      script: py.test

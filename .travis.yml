@@ -1,22 +1,18 @@
 language: python
-sudo: false
 dist: xenial
 install: pip install -e .
 script: py.test
-
-matrix:
-  include:
-    # The pypy tests are slow, so we list them first
-    - python: pypy
-    - python: pypy3.5
-    - python: pypy3.6
-    - python: 2.7
-    - python: 3.3
-    - python: 3.4
-    - python: 3.5
-    - python: 3.6
-    - python: 3.7
-    - python: 3.5-dev
-    - python: 3.6-dev
-    - python: 3.7-dev
-    - python: 3.8-dev
+sudo: false
+python:
+  - "pypy"
+  - "pypy3"
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5-dev"
+  - "3.5"
+  - "3.6-dev"
+  - "3.6"
+  - "3.7-dev"
+  - "3.7"
+  - "3.8-dev"

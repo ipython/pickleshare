@@ -5,11 +5,16 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
-  - "3.7"
   - "3.5-dev"
   - "3.6-dev"
   - "3.7-dev"
+install: pip install -e .
+script: py.test
+sudo: false
+python: 
+  - "3.7"
   - "3.8-dev"
+ dist: xenial
 install: pip install -e .
 script: py.test
 sudo: false

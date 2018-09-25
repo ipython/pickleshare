@@ -1,20 +1,30 @@
 language: python
-python:
-  - "2.7"
-  - "3.3"
-  - "3.4"
-  - "3.5"
-  - "3.6"
-  - "3.5-dev"
-  - "3.6-dev"
-  - "3.7-dev"
+sudo: false
+dist: trusty
 install: pip install -e .
 script: py.test
-sudo: false
-python: 
-  - "3.7"
-  - "3.8-dev"
-dist: xenial
-install: pip install -e .
-script: py.test
-sudo: false
+
+matrix:
+  include:
+    # The pypy tests are slow, so we list them first
+    - python: pypy3.5
+    - language: generic
+      env: PYPY_NIGHTLY_BRANCH=py3.5
+    - language: generic
+      env: PYPY_NIGHTLY_BRANCH=py3.6
+    - python: 2.7
+    - python: 3.3
+    - python: 3.4
+    - python: 3.5
+    - python: 3.6
+    - python: 3.7
+      dist: xenial
+      sudo: false
+    - python: 3.5-dev
+    - python: 3.6-dev
+    - python: 3.7-dev
+      dist: xenial
+      sudo: false
+    - python: 3.8-dev
+      dist: xenial
+      sudo: false

@@ -105,7 +105,13 @@ class PickleShareDB(collections_abc.MutableMapping):
 
         self.cache[fil] = (obj,mtime)
         return obj
-
+    
+    def append(self, key, value):
+        currentValue = self[key]
+        currentValue.append(value)
+        updatedValue = currentValue
+        self[key] = updatedValue
+        
     def __setitem__(self,key,value):
         """ db['key'] = 5 """
         fil = self.root / key

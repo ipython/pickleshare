@@ -20,7 +20,7 @@ setup(
         # Ugly, but we can't do < comparison here
         ':python_version in "2.6 2.7 3.2 3.3"': ['pathlib2'],
     },
-    url="https://github.com/pickleshare/pickleshare",
+    url="https://github.com/ipython/pickleshare",
     keywords="database persistence pickle ipc shelve",
     long_description="""\
 PickleShare - a small 'shelve' like datastore with concurrency support

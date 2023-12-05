@@ -12,6 +12,8 @@ def test_pickleshare(tmpdir):
     assert db['hello'] == 15
     db['aku ankka'] = [1,2,313]
     assert db['aku ankka'] == [1,2,313]
+    db.append('aku ankka', 42)
+    assert db['aku ankka'] == [1,2,313,42]
     db['paths/nest/ok/keyname'] = [1,(5,46)]
     assert db['paths/nest/ok/keyname'] == [1,(5,46)]
 

@@ -24,7 +24,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
         cache: pip
         cache-dependency-path: |
-          setup.cfg
+          pyproject.toml
     - name: Install and update Python dependencies (binary only)
       if: ${{ ! contains( matrix.python-version, 'dev' ) }}
       run: |

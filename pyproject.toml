@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pickleshare"
+dynamic = ["version"]
+description = "Tiny 'shelve'-like database with concurrency support"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "IPython project" }]
+keywords = ["database", "persistence", "pickle", "ipc", "shelve"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+]
+requires-python = ">=3.7"
+
+[project.urls]
+Homepage = "https://github.com/ipython/pickleshare"
+
+[tool.setuptools]
+py-modules = ["pickleshare"]
+
+[tool.setuptools.dynamic]
+version = { attr = "pickleshare.__version__" }
